@@ -29,6 +29,16 @@ const DUMMY_EVENTS = [
     image: "images/programming.jpg",
     isFeatured: true,
   },
+  {
+    id: "e4",
+    title: "Starting a company",
+    description:
+      "You know you can build better company than the one you are currently in, go for it.",
+    location: "My Street 12, 10115 Super City",
+    date: "2022-12-25",
+    image: "images/programming.jpg",
+    isFeatured: true,
+  },
 ];
 
 export function getFeaturedEvents() {
