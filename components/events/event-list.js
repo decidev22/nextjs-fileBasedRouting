@@ -3,7 +3,7 @@ import classes from "./event-list.module.css";
 
 const EventList = (props) => {
   const { items } = props;
-  console.log(items);
+  console.log("event-list: items: ", items);
 
   return (
     <ul className={classes.list}>
