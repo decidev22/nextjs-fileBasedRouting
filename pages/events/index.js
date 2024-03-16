@@ -4,6 +4,7 @@ import EventsSearch from "../../components/events/events-search";
 import { Fragment } from "react";
 import { useRouter } from "next/router";
 import { getEvents } from "../../helpers/api-util";
+import Head from "next/head";
 
 const AllEventsPage = (props) => {
   // fetch all events... but in serverside and receive it as props.
@@ -20,6 +21,10 @@ const AllEventsPage = (props) => {
   };
   return (
     <Fragment>
+      <Head>
+        <title>Event For Engineers</title>
+        <meta name="description" content="Do some networking." />
+      </Head>
       <EventsSearch onSearch={findEventHandler} />
       <EventList items={events} />
     </Fragment>

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import Head from "next/head";
 // import { getEventById } from "../../dummy-data";
 import {
   getEventById,
@@ -30,6 +31,10 @@ const EventDetailPage = (props) => {
 
   return (
     <Fragment>
+      <Head>
+        <title>{event.title}</title>
+        <meta name="description" content="Do some networking." />
+      </Head>
       <EventSummary title={event.title} />
       <EventLogistics
         date={event.date}

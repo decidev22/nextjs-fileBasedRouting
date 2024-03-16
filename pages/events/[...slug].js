@@ -6,6 +6,7 @@ import ResultsTitle from "../../components/events/results-title";
 import Button from "../../components/ui/button";
 import ErrorAlert from "../../components/ui/error-alert";
 import useSWR from "swr";
+import Head from "next/head";
 
 const FilteredEventPage = () => {
   const [loadedEvents, setLoadedEvents] = useState();
@@ -31,19 +32,39 @@ const FilteredEventPage = () => {
         });
       }
       setLoadedEvents(events_array);
-      console.log(loadedEvents);
     }
   }, [data]);
 
-  if (!loadedEvents) {
-    return <p className="center">Loading...</p>;
-  }
+  let pageHeadData = (
+    <Head>
+      <title>Your desired Events</title>
+      <meta name="description" content="A list of filtered events" />
+    </Head>
+  );
 
+  if (!loadedEvents) {
+    return (
+      <Fragment>
+        {pageHeadData}
+        <p className="center">Loading...</p>;
+      </Fragment>
+    );
+  }
   const filteredYear = filterData[0];
   const filteredMonth = filterData[1];
 
   const numYear = +filteredYear;
   const numMonth = +filteredMonth;
+
+  pageHeadData = (
+    <Head>
+      <title>Your desired Events</title>
+      <meta
+        name="description"
+        content={`All events in ${numYear} / ${numMonth}`}
+      />
+    </Head>
+  );
 
   if (
     isNaN(numYear) ||
@@ -56,6 +77,7 @@ const FilteredEventPage = () => {
   ) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid Filter</p>
         </ErrorAlert>
@@ -78,6 +100,7 @@ const FilteredEventPage = () => {
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for the chosen filter.</p>
         </ErrorAlert>
@@ -89,6 +112,7 @@ const FilteredEventPage = () => {
 
   return (
     <Fragment>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </Fragment>
